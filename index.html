@@ -511,187 +511,7 @@
           </p>
         </div>
       </div>
-      <div class="row mt-5">
-        <!-- <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card mb-4 shadow">
-            <img
-              src="assets/product/masamortarthb.jpg"
-              class="card-img-top img-fluid"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <p class="card-text">Masa Mortar</p>
-              <p class="text-muted fs-6 text">Rp. 65.000</p>
-              <p class="text-muted fs-6 text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-
-              <button
-                type="button"
-                class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-              >
-                <i class="fa-brands fa-whatsapp"></i> ORDER
-              </button>
-            </div>
-          </div> -->
-          <script>
-            $(document).ready(function () {
-              $.ajax({
-                url: 'http://127.0.0.1:8000/api/product',
-                type: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                  // Looping setiap produk
-                  $.each(response.data, function (index, product) {
-                    // Membuat tampilan produk pada HTML
-                    const productCard = `
-                      <div class="col-sm-6 col-md-6 col-lg-3">
-                        <div class="card mb-4 shadow">
-                          <img
-                            src="${product.image}"
-                            class="card-img-top img-fluid"
-                            alt="${product.nama}"
-                          />
-                          <div class="card-body">
-                            <p class="card-text">${product.nama}</p>
-                            <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
-                            <p class="text-muted fs-6 text">${product.keterangan}</p>
-      
-                            <button
-                              type="button"
-                              class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-                            >
-                              <i class="fa-brands fa-whatsapp"></i> ORDER
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    `;
-      
-                    // Menambahkan tampilan produk ke container pada halaman HTML
-                    $('#product-container').append(productCard);
-                  });
-                },
-                error: function (xhr, status, error) {
-                  console.log(error);
-                }
-              });
-            });
-          </script>
-        </div>
-        <script>
-            $(document).ready(function () {
-              $.ajax({
-                url: 'http://127.0.0.1:8000/api/product',
-                type: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                  // Looping setiap produk
-                  $.each(response.data, function (index, product) {
-                    // Membuat tampilan produk pada HTML
-                    const productCard = `
-                      <div class="col-sm-6 col-md-6 col-lg-3">
-                        <div class="card mb-4 shadow">
-                          <img
-                            src="${product.image}"
-                            class="card-img-top img-fluid"
-                            alt="${product.nama}"
-                          />
-                          <div class="card-body">
-                            <p class="card-text">${product.nama}</p>
-                            <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
-                            <p class="text-muted fs-6 text">${product.keterangan}</p>
-      
-                            <button
-                              type="button"
-                              class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-                            >
-                              <i class="fa-brands fa-whatsapp"></i> ORDER
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    `;
-      
-                    // Menambahkan tampilan produk ke container pada halaman HTML
-                    $('#product-container').append(productCard);
-                  });
-                },
-                error: function (xhr, status, error) {
-                  console.log(error);
-                }
-              });
-            });
-          </script>
-        <!-- <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card mb-4 shadow">
-            <img
-              src="assets/product/mizu.jpg"
-              class="card-img-top"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <p class="card-text">Mizu Plester 50kg</p>
-              <p class="text-muted fs-6 text">Rp. 45.000</p>
-              <p class="text-muted fs-6 text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-
-              <button
-                type="button"
-                class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-              >
-                <i class="fa-brands fa-whatsapp"></i> ORDER
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card mb-4 shadow">
-            <img
-              src="assets/product/proof.jpg"
-              class="card-img-top"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <p class="card-text">Mizu Proof 5kg</p>
-              <p class="text-muted fs-6 text">Rp. 195.000</p>
-              <p class="text-muted fs-6 text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-
-              <button
-                type="button"
-                class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-              >
-                <i class="fa-brands fa-whatsapp"></i> ORDER
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card mb-4 shadow">
-            <img
-              src="assets/product/semensm.jpg"
-              class="card-img-top"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <p class="card-text">Semen Singa Merah</p>
-              <p class="text-muted fs-6 text">Rp. 46.500</p>
-              <p class="text-muted fs-6 text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-
-              <button
-                type="button"
-                class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-              >
-                <i class="fa-brands fa-whatsapp"></i> ORDER
-              </button>
-            </div>
-          </div>
-        </div> -->
+      <div class="row mt-5 product-container">
       </div>
       <div class="row">
         <div class="col-12 mt-4">
@@ -1211,5 +1031,50 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: 'http://127.0.0.1:8000/api/product',
+          type: 'GET',
+          dataType: 'json',
+          success: function (response) {
+            // Looping setiap produk dengan batasan index kurang dari 4
+            for (let i = 0; i < 4; i++) {
+              const product = response.data[i];
+              // Membuat tampilan produk pada HTML
+              const productCard = `
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                  <div class="card mb-4 shadow">
+                    <img
+                      src="${product.image}"
+                      class="card-img-top img-fluid"
+                      alt="${product.nama}"
+                    />
+                    <div class="card-body">
+                      <p class="card-text">${product.nama}</p>
+                      <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
+                      <p class="text-muted fs-6 text">${product.keterangan}</p>
+      
+                      <button
+                        type="button"
+                        class="cartButton btn btn-outline-dark rounded-pill btn-lg"
+                      >
+                        <i class="fa-brands fa-whatsapp"></i> ORDER
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+      
+              // Menambahkan tampilan produk ke container pada halaman HTML
+              $('.product-container').append(productCard);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.log(error);
+          }
+        });
+      });      
+    </script>
   </body>
 </html>
