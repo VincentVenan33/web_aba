@@ -1056,11 +1056,12 @@
                       <p class="text-muted fs-6 text">${product.keterangan}</p>
       
                       <button
-                        type="button"
-                        class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-                      >
-                        <i class="fa-brands fa-whatsapp"></i> ORDER
-                      </button>
+    type="button"
+    class="cartButton btn btn-outline-dark rounded-pill btn-lg"
+    onclick="window.open('${product.whatsapp}')"
+>
+    <i class="fa-brands fa-whatsapp"></i> ORDER
+</button>
                     </div>
                   </div>
                 </div>
