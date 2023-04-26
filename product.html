@@ -38,6 +38,7 @@
     />
     <!-- Link CDN AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 
   <body>
@@ -230,48 +231,51 @@
     <script>
       const url='http://127.0.0.1:8000/api/';
       $(document).ready(function () {
-        $.ajax({
-          url: url+"product",
-          type: "GET",
-          dataType: "json",
-          success: function (response) {
-            // Looping setiap produk
-            $.each(response.data, function (index, product) {
-              // Membuat tampilan produk pada HTML
-              const productCard = `
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="card mb-4 shadow">
-                    <img
-                      src="${product.image}"
-                      class="card-img-top img-fluid"
-                      alt="${product.nama}"
-                    />
-                    <div class="card-body">
-                      <p class="card-text">${product.nama}</p>
-                      <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
-                      <p class="text-muted fs-6 text">${product.keterangan}</p>
-
-                      <button
-    type="button"
-    class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-    onclick="window.open('${product.whatsapp}')"
->
-    <i class="fa-brands fa-whatsapp"></i> ORDER
-</button>
-
+          $.ajax({
+            url: url+'product',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+              // Looping setiap katalog
+              $.each(response.data, function (index, product) {
+                // Pengecekan status katalog
+                if (product.status == 1) {
+                  // Membuat tampilan katalog pada HTML
+                  const productCard = `
+                  <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="card mb-4 shadow">
+                      <img
+                        src="${product.image}"
+                        class="card-img-top img-fluid"
+                        alt="${product.nama}"
+                      />
+                      <div class="card-body">
+                        <p class="card-text">${product.nama}</p>
+                        <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
+                        <p class="text-muted fs-6 text">${product.keterangan}</p>
+        
+                        <button
+                          type="button"
+                          class="cartButton btn btn-outline-dark rounded-pill btn-lg"
+                          onclick="window.open('${product.whatsapp}')"
+                        >
+                          <i class="fa-brands fa-whatsapp"></i> ORDER
+                        </button>
+        
+                      </div>
                     </div>
                   </div>
-                </div>
-              `;
-
-              // Menambahkan tampilan produk ke container pada halaman HTML
-              $(".product-container").append(productCard);
-            });
-          },
-          error: function (xhr, status, error) {
-            console.log(error);
-          }
-        });
+                  `;
+              
+                  // Menambahkan tampilan katalog ke container pada halaman HTML
+                  $('.product-container').append(productCard);
+                }
+              });              
+            },
+            error: function (xhr, status, error) {
+              console.log(error);
+            }
+          });     
       });
     </script>
   </body>

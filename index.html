@@ -547,9 +547,9 @@
       </div>
       <div class="row mt-5 catalog-container justify-content-center">
     </div>
-
+  </div>
     <!-- line hr -->
-    <div class="container-fluid px-5 mt-5" data-aos="fade-down">
+    <div class="container-fluid px-5 mt-5">
       <div class="row">
         <div class="col-12">
           <hr />
@@ -558,7 +558,7 @@
     </div>
 
     <!-- footer -->
-    <div class="footer container text-start mt-5" data-aos="fade-down">
+    <div class="footer container text-start mt-5">
       <div class="row p-5">
         <div class="col-12 col-md-4">
           <p class="fs-6 fw-bold group_merah">Official</p>
@@ -576,7 +576,7 @@
       <div class="row p-5">
         <div class="col-12 col-sm-4">
           <img
-            class="logo_contact_us mb-3"
+            class="logo_contact_us"
             src="assets/logo.png"
             alt="asiabangunabadi"
           />
@@ -605,8 +605,8 @@
     </div>
 
     <!-- copyright -->
-    <div class="container-fluid copyright py-4" >
-      <div class="row text-center" >
+    <div class="container-fluid copyright py-4">
+      <div class="row text-center">
         <div class="col text-white">
           &#169; 2022 Asia Bangun Abadi. All Rights Reserved.
         </div>
@@ -662,46 +662,49 @@
             // Looping setiap team dengan batasan index kurang dari 4
             for (let i = 0; i < 4; i++) {
               const team = response.data[i];
-              // Membuat tampilan team pada HTML
-              const teamCard = `
-              <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 text-center" >
-                <div class="our_team_1 mb-5">
-                  <img width="45%" src="${team.image}" alt="${team.nama}" />
-      
-                  <div class="wrapTrapezoid">
-                    <div class="trapezoid">
-                      <p class="text-white pt-3">
-                        ${team.nama} <span class="text-black"> <br />${team.jabatan}</span>
-                      </p>
+              // Memeriksa status anggota tim
+              if (team.status == 1) {
+                // Membuat tampilan team pada HTML
+                const teamCard = `
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 text-center" >
+                  <div class="our_team_1 mb-5">
+                    <img width="45%" src="${team.image}" alt="${team.nama}" />
+        
+                    <div class="wrapTrapezoid">
+                      <div class="trapezoid">
+                        <p class="text-white pt-3">
+                          ${team.nama} <span class="text-black"> <br />${team.jabatan}</span>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-      
-                  <div class="shadow p-3 p-md-5 borderCeo">
-                    <div class="row">
-                      <p class="my-5">
-                        ${team.deskripsi}
-                      </p>
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.linkedin}')">
-                          <i class="fa-brands fa-linkedin-in"></i>
-                        </button>
-                        <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.facebook}')">
-                          <i class="fa-brands fa-facebook-f"></i>
-                        </button>
-                        <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.instagram}')">
-                          <i class="fa-brands fa-instagram"></i>
-                        </button>
+        
+                    <div class="shadow p-3 p-md-5 borderCeo">
+                      <div class="row">
+                        <p class="my-5">
+                          ${team.deskripsi}
+                        </p>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.linkedin}')">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                          </button>
+                          <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.facebook}')">
+                            <i class="fa-brands fa-facebook-f"></i>
+                          </button>
+                          <button type="button" class="btn btn-dark rounded-circle" onclick="window.open('${team.instagram}')">
+                            <i class="fa-brands fa-instagram"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              `;
-      
-              // Menambahkan tampilan team ke container pada halaman HTML
-              $('.team-container').append(teamCard);
+                `;
+        
+                // Menambahkan tampilan team ke container pada halaman HTML
+                $('.team-container').append(teamCard);
+              }
             }
           },
           error: function (xhr, status, error) {
@@ -710,48 +713,51 @@
         });
         //produk
         $.ajax({
-          url: url+'product',
+          url: url + 'product',
           type: 'GET',
           dataType: 'json',
           success: function (response) {
             // Looping setiap produk dengan batasan index kurang dari 4
             for (let i = 0; i < 4; i++) {
               const product = response.data[i];
-              // Membuat tampilan produk pada HTML
-              const productCard = `
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="card mb-4 shadow">
-                    <img
-                      src="${product.image}"
-                      class="card-img-top img-fluid"
-                      alt="${product.nama}"
-                    />
-                    <div class="card-body">
-                      <p class="card-text">${product.nama}</p>
-                      <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
-                      <p class="text-muted fs-6 text">${product.keterangan}</p>
-      
-                      <button
-    type="button"
-    class="cartButton btn btn-outline-dark rounded-pill btn-lg"
-    onclick="window.open('${product.whatsapp}')"
->
-    <i class="fa-brands fa-whatsapp"></i> ORDER
-</button>
+              if (product.status == 1) { // mengecek apakah status produk adalah 1
+                // Membuat tampilan produk pada HTML
+                const productCard = `
+                  <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="card mb-4 shadow">
+                      <img
+                        src="${product.image}"
+                        class="card-img-top img-fluid"
+                        alt="${product.nama}"
+                      />
+                      <div class="card-body">
+                        <p class="card-text">${product.nama}</p>
+                        <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
+                        <p class="text-muted fs-6 text">${product.keterangan}</p>
+        
+                        <button
+                          type="button"
+                          class="cartButton btn btn-outline-dark rounded-pill btn-lg"
+                          onclick="window.open('${product.whatsapp}')"
+                        >
+                          <i class="fa-brands fa-whatsapp"></i> ORDER
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              `;
-      
-              // Menambahkan tampilan produk ke container pada halaman HTML
-              $('.product-container').append(productCard);
+                `;
+        
+                // Menambahkan tampilan produk ke container pada halaman HTML
+                $('.product-container').append(productCard);
+              }
             }
           },
           error: function (xhr, status, error) {
             console.log(error);
           }
         });
-        //katalog
+        
+         //katalog
           $.ajax({
             url: url+'catalog',
             type: 'GET',
@@ -759,35 +765,38 @@
             success: function (response) {
               // Looping setiap katalog
               $.each(response.data, function (index, catalog) {
-                // Membuat tampilan katalog pada HTML
-                const catalogCard = `
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3 ">
-                  <div class="cardbox_catalog rounded shadow">
-                    <img 
-                      src="${catalog.image}"
-                      alt="${catalog.nama}"
-                      class="img-fluid rounded"
-                    />
-        
-                    <div class="content_catalog rounded">
-                      <a
-                        href="${catalog.file}"
-                        target="_blank"
-                        class="btn btn-info rounded-pill btn-md"
-                        ><i class="fas fa-cloud-download-alt"></i> Download</a
-                      >
+                // Pengecekan status katalog
+                if (catalog.status == 1) {
+                  // Membuat tampilan katalog pada HTML
+                  const catalogCard = `
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-3 ">
+                    <div class="cardbox_catalog rounded shadow">
+                      <img 
+                        src="${catalog.image}"
+                        alt="${catalog.nama}"
+                        class="img-fluid rounded"
+                      />
+              
+                      <div class="content_catalog rounded">
+                        <a
+                          href="${catalog.file}"
+                          target="_blank"
+                          class="btn btn-info rounded-pill btn-md"
+                          ><i class="fas fa-cloud-download-alt"></i> Download</a
+                        >
+                      </div>
+                    </div>
+                    <div class="content_catalog_1 text-start">
+                      <p class="blueColor fw-bold mb-0 mt-2">${catalog.nama}</p>
+                      <p class="redColor">${catalog.keterangan}</p>
                     </div>
                   </div>
-                  <div class="content_catalog_1 text-start">
-                    <p class="blueColor fw-bold mb-0 mt-2">${catalog.nama}</p>
-                    <p class="redColor">${catalog.keterangan}</p>
-                  </div>
-                </div>
-                `;
-  
-                // Menambahkan tampilan katalog ke container pada halaman HTML
-                $('.catalog-container').append(catalogCard);
-              });
+                  `;
+              
+                  // Menambahkan tampilan katalog ke container pada halaman HTML
+                  $('.catalog-container').append(catalogCard);
+                }
+              });              
             },
             error: function (xhr, status, error) {
               console.log(error);
