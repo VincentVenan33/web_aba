@@ -652,26 +652,17 @@
           type: "GET",
           dataType: "json",
           success: function (response) {
-            const teams = response.data.filter(team => team.status == 1);
-            const remainingTeams = response.data.filter(team => team.status == 0);
-            const numTeams = teams.length;
-            const numRemainingTeams = remainingTeams.length;
-            let i = 0;
-            
-            while (numTeams < 4 && i < numRemainingTeams) {
-              teams.push(remainingTeams[i]);
-              numTeams++;
-              i++;
-            }
-            
-            for (let i = 0; i < numTeams; i++) {
-              const team = teams[i];
-              // Membuat tampilan team pada HTML
-              const teamCard = `
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 text-center" >
+            // Looping setiap team dengan batasan index kurang dari jumlah data team
+            let counter = 0;
+            for (let i = 0; i < response.data.length; i++) {
+              const team = response.data[i];
+              if (team.status == 1) {
+                // mengecek apakah status team adalah 1
+                // Membuat tampilan team pada HTML
+                const teamCard = `
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 text-center" >
                   <div class="our_team_1 mb-5">
                     <img width="45%" src="${team.image}" alt="${team.nama}" />
-                    
                     <div class="wrapTrapezoid">
                       <div class="trapezoid">
                         <p class="text-white pt-3">
@@ -708,15 +699,24 @@
                     </div>
                   </div>
                 </div>
-              `;
-              // Menambahkan tampilan team ke container pada halaman HTML
-              $(".team-container").append(teamCard);
+                `;
+        
+                // Menambahkan tampilan team ke container pada halaman HTML
+                $(".team-container").append(teamCard);
+        
+                // Menambahkan counter jika team dengan status 1 ditemukan
+                counter++;
+                if (counter == 4) {
+                  break; // Berhenti loop jika sudah ditemukan 4 produk
+                }
+              }
             }
           },
           error: function (xhr, status, error) {
             console.log(error);
           }
         });
+        
         //produk
         $.ajax({
           url: url + "product",
@@ -770,9 +770,6 @@
             console.log(error);
           }
         });
-        
-        
-
         //katalog
         $.ajax({
           url: url + "catalog",
