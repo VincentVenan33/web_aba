@@ -74,7 +74,7 @@
                 >
                   <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item mx-4">
-                      <a class="nav-link" aria-current="page" href="#welcome"
+                      <a class="nav-link" aria-current="page" href="index.html#welcome"
                         >Profile</a
                       >
                     </li>
@@ -88,7 +88,7 @@
                       <a class="nav-link" href="#catalog">Catalog</a>
                     </li>
                     <li class="nav-item mx-4">
-                      <a class="nav-link" href="contact">Contact Us</a>
+                      <a class="nav-link" href="contact.html">Contact Us</a>
                     </li>
                   </ul>
                 </div>
@@ -674,7 +674,7 @@
                     <div class="shadow p-3 p-md-5 borderCeo">
                       <div class="row">
                         <p class="my-5">
-                          ${team.deskripsi}
+                          ${team.deskripsi.length > 15 ? team.deskripsi.substring(0, 15) + "..." : team.deskripsi}
                         </p>
                       </div>
                       <div class="row">
@@ -741,8 +741,7 @@
                       <div class="card-body">
                         <p class="card-text">${product.nama}</p>
                         <p class="text-muted fs-6 text">Rp. ${product.harga}</p>
-                        <p class="text-muted fs-6 text">${product.keterangan}</p>
-        
+                        <p class="text-muted fs-6 text">${product.keterangan.length > 15 ? product.keterangan.substring(0, 15) + "..." : product.keterangan}</p>
                         <button
                           type="button"
                           class="cartButton btn btn-outline-dark rounded-pill btn-lg"
@@ -800,8 +799,8 @@
                       </div>
                     </div>
                     <div class="content_catalog_1 text-start">
-                      <p class="blueColor fw-bold mb-0 mt-2">${catalog.nama}</p>
-                      <p class="redColor">${catalog.keterangan}</p>
+                      <p class="blueColor fw-bold mb-0 mt-2">${catalog.nama}</p>                      
+                      <p class="redColor">${catalog.keterangan.length > 15 ? catalog.keterangan.substring(0, 15) + "..." : catalog.keterangan}</p>
                     </div>
                   </div>
                   `;
