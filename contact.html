@@ -154,30 +154,30 @@
         <div class="col-12 col-md-6">
           <form id="form_kirim_email" method="POST" action="http://127.0.0.1:8000/api/contact">
             <div class="row mt-5">
-                <div class="col-12 col-md-6 mb-3">
-                    <input type="text" class="form-control shadow lh-lg" id="nama" name="nama" placeholder="Nama" required>
-                </div>
-        
-                <div class="col-12 col-md-6">
-                    <input type="email" class="form-control shadow lh-lg" id="email" name="email" placeholder="Email" required>
-                </div>
+              <div class="col-12 col-md-6 mb-3">
+                <input type="text" class="form-control shadow lh-lg" id="nama" name="nama" placeholder="Nama" required minlength="3" data-error="Nama harus diisi minimal 3 karakter">
+                <div class="invalid-feedback">Nama tidak boleh kosong dan minimal 3 huruf</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <input type="email" class="form-control shadow lh-lg" id="email" name="email" placeholder="Email" required data-error="Email harus diisi dengan format yang valid (contoh: email@example.com)">
+                <div class="invalid-feedback">Email tidak boleh kosong dan harus mengandung @</div>
+              </div>
             </div>
-        
             <div class="row mt-3">
-                <div class="col-12">
-                    <textarea rows="10" class="form-control shadow lh-lg" placeholder="Pesan" id="pesan" name="pesan" required></textarea>
-                </div>
+              <div class="col-12">
+                <textarea rows="10" class="form-control shadow lh-lg" placeholder="Pesan" id="pesan" name="pesan" required data-error="Pesan tidak boleh kosong"></textarea>
+                <div class="invalid-feedback">Pesan tidak boleh kosong</div>
+              </div>
             </div>
-        
             <div class="row">
-                <div class="col-12 text-md-end text-center">
-                    <button type="submit" class="btn btn-dark rounded-pill btn-lg my-3 px-5 formSubmitButton">
-                        <i class="fa-regular fa-paper-plane"></i> Submit
-                    </button>
-                </div>
+              <div class="col-12 text-md-end text-center">
+                <button type="submit" class="btn btn-dark rounded-pill btn-lg my-3 px-5 formSubmitButton">
+                  <i class="fa-regular fa-paper-plane"></i> Submit
+                </button>
+              </div>
             </div>
-        </form>        
-        </div>
+          </form>
+        </div>      
       </div>
     </div>
     <div class="container-fluid">
@@ -302,29 +302,36 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      $(document).ready(function(){
-          $('.formSubmitButton').click(function(e){
-              e.preventDefault();
-              $.ajax({
-                  url: 'http://127.0.0.1:8000/api/contact',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: $('#form_kirim_email').serialize(),
-                  success: function(response){
-                      toastr.success(response.message);
-                      // or alert(response.message);
-                      $('#nama').val('');
-                      $('#email').val('');
-                      $('#message').val('');
-                  },
-                  error: function(response){
-                      toastr.error('Terima kasih telah mengirimkan pesan. Kami akan segera merespon permintaan Anda.');
-                      // or alert('Terima kasih telah mengirimkan pesan. Kami akan segera merespon permintaan Anda.');
-                  }
-              });
-          });
+      $(document).ready(function() {
+        $('.formSubmitButton').click(function(e) {
+          e.preventDefault();
+          var form = $('#form_kirim_email');
+          var validator = form[0].checkValidity();
+          if (validator === false) {
+            e.stopPropagation();
+          }
+          form.addClass('was-validated');
+          if (form[0].checkValidity() === true) {
+            $.ajax({
+              url: 'http://127.0.0.1:8000/api/contact',
+              type: 'POST',
+              dataType: 'json',
+              data: form.serialize(),
+              success: function(response) {
+                toastr.success(response.message);
+                $('#nama').val('');
+                $('#email').val('');
+                $('#pesan').val('');
+                form.removeClass('was-validated');
+              },
+              error: function(response) {
+                toastr.error('Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.');
+                form.removeClass('was-validated');
+              }
+            });
+          }
+        });
       });
-  </script>
-  
+      </script>  
   </body>
 </html>
