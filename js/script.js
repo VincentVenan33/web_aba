@@ -130,3 +130,23 @@ $("ul.navbar-nav li")
       once: true,
     })
   })
+  $(document).ready(function() {
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+        var ipAddress = data.ip;
+
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/pengunjung",
+            method: "POST",
+            data: {
+                pageURL: window.location.href,
+                ipAddress: ipAddress
+            },
+            success: function(response) {
+                console.log("Pencatatan berhasil");
+            },
+            error: function(xhr, status, error) {
+                console.log("Terjadi kesalahan dalam pencatatan");
+            }
+        });
+    });
+});
