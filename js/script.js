@@ -133,13 +133,16 @@ $("ul.navbar-nav li")
   $(document).ready(function() {
     $.getJSON("https://api.ipify.org?format=json", function(data) {
         var ipAddress = data.ip;
+        var currentTime = new Date().toISOString(); // Mendapatkan waktu sekarang dalam format ISO
 
         $.ajax({
             url: "http://127.0.0.1:8000/api/pengunjung",
             method: "POST",
             data: {
                 pageURL: window.location.href,
-                ipAddress: ipAddress
+                ipAddress: ipAddress,
+                created_at: currentTime,
+                updated_at: currentTime
             },
             success: function(response) {
                 console.log("Pencatatan berhasil");
